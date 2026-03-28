@@ -1,0 +1,150 @@
+{
+  "last_node_id": 18,
+  "last_link_id": 23,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [40, 100],
+      "size": {"0": 315, "1": 98},
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [10]},
+        {"name": "CLIP", "type": "CLIP", "links": [11, 12]},
+        {"name": "VAE", "type": "VAE", "links": [13]}
+      ],
+      "widgets_values": ["flux1-schnell-fp8.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "LoraLoader",
+      "pos": [400, 100],
+      "size": {"0": 315, "1": 126},
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 10},
+        {"name": "clip", "type": "CLIP", "link": 11}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [14]},
+        {"name": "CLIP", "type": "CLIP", "links": [15]}
+      ],
+      "widgets_values": ["flux_consistency_lora.safetensors", 0.9, 0.9]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [400, 280],
+      "size": {"0": 422, "1": 164},
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 15}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [16]}],
+      "widgets_values": ["[trigger] photorealistic portrait, soft studio lighting, 8k, ultra detailed, sharp focus"]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [400, 460],
+      "size": {"0": 422, "1": 164},
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 12}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [17]}],
+      "widgets_values": ["blurry, distorted, ugly, bad anatomy, watermark, text, artifacts"]
+    },
+    {
+      "id": 5,
+      "type": "LoadImage",
+      "pos": [40, 280],
+      "size": {"0": 315, "1": 314},
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [18]},
+        {"name": "MASK", "type": "MASK", "links": []}
+      ],
+      "widgets_values": ["input_art_image.png", "image"]
+    },
+    {
+      "id": 6,
+      "type": "VAEEncode",
+      "pos": [40, 620],
+      "size": {"0": 210, "1": 46},
+      "inputs": [
+        {"name": "pixels", "type": "IMAGE", "link": 18},
+        {"name": "vae", "type": "VAE", "link": 13}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [19]}]
+    },
+    {
+      "id": 7,
+      "type": "LoadImageMask",
+      "pos": [280, 620],
+      "size": {"0": 315, "1": 130},
+      "outputs": [{"name": "MASK", "type": "MASK", "links": [20]}],
+      "widgets_values": ["inpaint_mask.png", "alpha", "image"]
+    },
+    {
+      "id": 8,
+      "type": "SetLatentNoiseMask",
+      "pos": [40, 720],
+      "size": {"0": 210, "1": 46},
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 19},
+        {"name": "mask", "type": "MASK", "link": 20}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [21]}]
+    },
+    {
+      "id": 9,
+      "type": "KSampler",
+      "pos": [700, 300],
+      "size": {"0": 315, "1": 262},
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 14},
+        {"name": "positive", "type": "CONDITIONING", "link": 16},
+        {"name": "negative", "type": "CONDITIONING", "link": 17},
+        {"name": "latent_image", "type": "LATENT", "link": 21}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [22]}],
+      "widgets_values": [42, "fixed", 4, 3.5, "euler", "simple", 1.0]
+    },
+    {
+      "id": 10,
+      "type": "VAEDecode",
+      "pos": [1060, 300],
+      "size": {"0": 210, "1": 46},
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 22},
+        {"name": "vae", "type": "VAE", "link": 13}
+      ],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [23]}]
+    },
+    {
+      "id": 11,
+      "type": "SaveImage",
+      "pos": [1300, 300],
+      "size": {"0": 315, "1": 270},
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 23}],
+      "widgets_values": ["inpaint_output"]
+    }
+  ],
+  "links": [
+    [10, 1, 0, 2, 0, "MODEL"],
+    [11, 1, 1, 2, 1, "CLIP"],
+    [12, 1, 1, 4, 0, "CLIP"],
+    [13, 1, 2, 6, 1, "VAE"],
+    [14, 2, 0, 9, 0, "MODEL"],
+    [15, 2, 1, 3, 0, "CLIP"],
+    [16, 3, 0, 9, 1, "CONDITIONING"],
+    [17, 4, 0, 9, 2, "CONDITIONING"],
+    [18, 5, 0, 6, 0, "IMAGE"],
+    [19, 6, 0, 8, 0, "LATENT"],
+    [20, 7, 0, 8, 1, "MASK"],
+    [21, 8, 0, 9, 3, "LATENT"],
+    [22, 9, 0, 10, 0, "LATENT"],
+    [23, 10, 0, 11, 0, "IMAGE"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {"scale": 0.7, "offset": [0, 0]},
+    "_workflow_description": "FLUX.2 Inpaint with Consistency LoRA — identity-preserving face/body inpainting",
+    "_lora_weight_note": "Adjust LoRA strength (node 2) between 0.8–1.0 for identity strength",
+    "_mask_note": "Provide a white-on-black mask image where white = region to inpaint"
+  },
+  "version": 0.4
+}

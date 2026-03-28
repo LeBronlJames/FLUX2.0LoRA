@@ -1,0 +1,74 @@
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Model weights & large binaries ───────────────────────────────────────────
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.onnx
+*.pkl
+*.npz
+
+# ── Datasets & generated images ──────────────────────────────────────────────
+data/
+output/
+logs/
+runs/
+wandb/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mp4
+*.gif
+
+# Keep README placeholder text files in examples/
+!examples/**/*.txt
+
+# ── Jupyter notebooks checkpoints ────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── ComfyUI generated ────────────────────────────────────────────────────────
+ComfyUI/output/
+ComfyUI/input/
+ComfyUI/models/
+ComfyUI/temp/
+
+# ── OS & editor artefacts ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ── Secrets & credentials ────────────────────────────────────────────────────
+.env
+*.env
+secrets.yaml
+*_token.txt
+
+# ── Cache ────────────────────────────────────────────────────────────────────
+.cache/
+*.hdf5
+*.h5
