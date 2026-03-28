@@ -1,0 +1,37 @@
+# ── Core ML / Diffusion ──────────────────────────────────────────────────────
+torch>=2.2.0
+torchvision>=0.17.0
+diffusers>=0.30.0
+transformers>=4.43.0
+accelerate>=0.30.0
+safetensors>=0.4.3
+peft>=0.11.0
+
+# ── Image processing ─────────────────────────────────────────────────────────
+Pillow>=10.3.0
+opencv-python>=4.9.0.80
+numpy>=1.26.0
+scikit-image>=0.22.0
+
+# ── Metrics ──────────────────────────────────────────────────────────────────
+torch-fidelity>=0.3.0          # FID computation
+lpips>=0.1.4                   # Perceptual similarity
+facenet-pytorch>=2.5.3         # ArcFace identity similarity
+open_clip_torch>=2.24.0        # CLIP score
+
+# ── ComfyUI / Gradio (optional, for demo) ────────────────────────────────────
+gradio>=4.36.0
+einops>=0.7.0
+
+# ── Training utilities ────────────────────────────────────────────────────────
+bitsandbytes>=0.43.0           # AdamW8bit optimizer
+prodigyopt>=1.0                # Optional: Prodigy optimizer
+lion-pytorch>=0.1.4            # Optional: Lion optimizer
+pyyaml>=6.0.1
+tqdm>=4.66.0
+rich>=13.7.0
+
+# ── Misc ─────────────────────────────────────────────────────────────────────
+huggingface-hub>=0.23.0
+requests>=2.32.0
+packaging>=24.0
