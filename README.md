@@ -12,20 +12,11 @@ This repository documents a **Consistency LoRA** trained on **FLUX.2 [klein] 9B 
 - **Cross-scene identity consistency** for narrative/storyboard generation  
 - Compatibility with common pipelines (e.g., inpaint/outpaint-based workflows)
 
-本仓库用于沉淀基于 **FLUX.2 [klein] 9B Base** 训练的 **Consistency LoRA** 方案，目标包括：
-- 将任意艺术风格输入稳定转换为写实照片（Art2Real），尽量降低身份漂移
-- 在多场景生成中保持人物身份一致（叙事系列/故事板）
-- 可与 Inpaint / Outpaint 等常见生成流程组合使用
-
-> Note: This repo is intentionally **minimal** and focuses on **presentation + usage guidance**.  
-> 权重文件不在仓库中分发（避免大文件与再分发风险），请按下文说明自行放置。
-
 ---
 
 ## Results / 效果展示（请替换为真实结果）
 ### Art2Real before/after
 Place your comparison image at:
-- `assets/before_after_comparison.png`
 
 ![before_after_comparison](assets/before_after_comparison.png)
 
