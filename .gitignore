@@ -1,0 +1,107 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+.installed.cfg
+*.egg-info
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+conda-env/
+
+# Model checkpoints & weights (large files — store via Git LFS or HuggingFace Hub)
+checkpoints/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.gguf
+*.ggml
+
+# Training data & datasets
+training_data/
+datasets/
+data/raw/
+data/processed/
+
+# Generated outputs
+output/
+outputs/
+results/
+generated/
+
+# Logs
+logs/
+*.log
+runs/
+wandb/
+tensorboard_logs/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# CUDA / GPU
+*.ptx
+*.cubin
+
+# HuggingFace cache
+.cache/huggingface/
+
+# Temp files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ComfyUI generated outputs (keep workflows, not outputs)
+ComfyUI/output/
+ComfyUI/input/
+ComfyUI/models/
+
+# Secrets
+.env.local
+.env.production
+secrets.yaml
+secrets.json
+api_keys.txt
